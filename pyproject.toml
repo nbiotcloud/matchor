@@ -24,7 +24,7 @@
 
 [tool.poetry]
 name = "matchor"
-version = "0.1.1"
+version = "1.0.0"
 description = "Extended Pattern Matching"
 readme = "README.md"
 license = "MIT"
