@@ -1,7 +1,7 @@
 #
 # MIT License
 #
-# Copyright (c) 2023 nbiotcloud
+# Copyright (c) 2023-2025 nbiotcloud
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -25,12 +25,11 @@
 Extended Pattern Matching.
 """
 
-
 import functools
 import re
 
 
-@functools.lru_cache()
+@functools.lru_cache
 def _compile_pattern(pat):
     res = _translate(pat)
     return re.compile(res).match
@@ -60,14 +59,14 @@ def match(name, pattern):
 
     Pattern may contain `*` and `?`. `*` matches any characters, `?` matches exactly one character.
 
-    >>> match('foo', 'foo')
-    True
-    >>> match('foo', '*')
-    True
-    >>> match('foo', 'bar*')
-    False
-    >>> match('foo', 'fo?')
-    True
+        >>> match('foo', 'foo')
+        True
+        >>> match('foo', '*')
+        True
+        >>> match('foo', 'bar*')
+        False
+        >>> match('foo', 'fo?')
+        True
     """
     if pattern == "*":
         return True
@@ -83,18 +82,18 @@ def matchs(name, patterns) -> bool:
 
     Pattern may contain `*` and `?`. `*` matches any characters, `?` matches exactly one character.
 
-    >>> matchs('foo', ['foo', 'bar'])
-    True
-    >>> matchs('foo', ['*'])
-    True
-    >>> matchs('foo', ['bar*', 'baz'])
-    False
-    >>> matchs('ba', ['bar*', 'baz'])
-    False
-    >>> matchs('baz', ['bar*', 'baz'])
-    True
-    >>> matchs('baz2', ['bar*', 'baz'])
-    False
+        >>> matchs('foo', ['foo', 'bar'])
+        True
+        >>> matchs('foo', ['*'])
+        True
+        >>> matchs('foo', ['bar*', 'baz'])
+        False
+        >>> matchs('ba', ['bar*', 'baz'])
+        False
+        >>> matchs('baz', ['bar*', 'baz'])
+        True
+        >>> matchs('baz2', ['bar*', 'baz'])
+        False
     """
     for pattern in patterns:
         if match(name, pattern):
@@ -108,15 +107,15 @@ def matchsp(name, patterns):
 
     Pattern may contain `*` and `?`. `*` matches any characters, `?` matches exactly one character.
 
-    >>> matchsp('foo', ['foo', 'bar'])
-    'foo'
-    >>> matchsp('foo', ['*'])
-    '*'
-    >>> matchsp('foo', ['bar*', 'baz'])
-    >>> matchsp('ba', ['bar*', 'baz'])
-    >>> matchsp('baz', ['bar*', 'baz'])
-    'baz'
-    >>> matchsp('baz2', ['bar*', 'baz'])
+        >>> matchsp('foo', ['foo', 'bar'])
+        'foo'
+        >>> matchsp('foo', ['*'])
+        '*'
+        >>> matchsp('foo', ['bar*', 'baz'])
+        >>> matchsp('ba', ['bar*', 'baz'])
+        >>> matchsp('baz', ['bar*', 'baz'])
+        'baz'
+        >>> matchsp('baz2', ['bar*', 'baz'])
     """
     for pattern in patterns:
         if match(name, pattern):
