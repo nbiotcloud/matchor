@@ -94,11 +94,20 @@ def matchs(name, patterns) -> bool:
         True
         >>> matchs('baz2', ['bar*', 'baz'])
         False
+
+    `matches` is an alias to `matchs`
+
+        >>> matches('foo', ['foo', 'bar'])
+        True
     """
     for pattern in patterns:
         if match(name, pattern):
             return True
     return False
+
+
+matches = matchs
+"""Alias to matchs."""
 
 
 def matchsp(name, patterns):
@@ -116,8 +125,17 @@ def matchsp(name, patterns):
         >>> matchsp('baz', ['bar*', 'baz'])
         'baz'
         >>> matchsp('baz2', ['bar*', 'baz'])
+
+    `matchespat` is an alias to `matchsp`
+
+        >>> matchespat('foo', ['foo', 'bar'])
+        'foo'
     """
     for pattern in patterns:
         if match(name, pattern):
             return pattern
     return None
+
+
+matchespat = matchsp
+"""Alias to matchsp."""
